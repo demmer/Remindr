@@ -39,7 +39,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 (reminders: [EKReminder]?) in
                 self.items.removeAll();
                 self.items.appendContentsOf(reminders!);
-                self.tableView.reloadData()
+                self.tableView.performSelectorOnMainThread(#selector(UITableView.reloadData), withObject: nil, waitUntilDone: true)
             });
         }
 
