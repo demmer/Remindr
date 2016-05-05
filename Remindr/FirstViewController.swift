@@ -11,39 +11,20 @@ import UIKit
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-
+    
     // MARK: properties
-    
+    var watcher: ReminderWatcher = ReminderWatcher.instance();    
     var items: [EKReminder] = [];
-    var eventStore: EKEventStore = EKEventStore.init();
 
+    func gotReminders(reminders: [EKReminder]) {
+        print("gotReminders", reminders.count)
+        self.items = reminders;
+        self.tableView.performSelectorOnMainThread(#selector(UITableView.reloadData), withObject: nil, waitUntilDone: true)
+    }
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        self.getEvents()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        self.getEvents()
-    }
-    
-    func getEvents() {
-        let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Reminder);
-        let remindersPredicate = self.eventStore.predicateForRemindersInCalendars(calendars);
-        self.eventStore.requestAccessToEntityType(EKEntityType.Reminder) { (granted, err) in
-            if (!granted) {
-                print("access denied");
-                return;
-            }
-            
-            self.eventStore.fetchRemindersMatchingPredicate(remindersPredicate, completion: {
-                (reminders: [EKReminder]?) in
-                self.items.removeAll();
-                self.items.appendContentsOf(reminders!);
-                self.tableView.performSelectorOnMainThread(#selector(UITableView.reloadData), withObject: nil, waitUntilDone: true)
-            });
-        }
-
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.watcher.watch(self.gotReminders)
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,7 +44,5 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     }
-
-
 }
 

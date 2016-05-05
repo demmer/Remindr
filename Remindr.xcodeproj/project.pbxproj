@@ -15,6 +15,7 @@
 		D70725E01CC7EB5300646549 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D70725DE1CC7EB5300646549 /* LaunchScreen.storyboard */; };
 		D70725EB1CC7EB5300646549 /* RemindrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70725EA1CC7EB5300646549 /* RemindrTests.swift */; };
 		D70725F61CC7EB5300646549 /* RemindrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70725F51CC7EB5300646549 /* RemindrUITests.swift */; };
+		D745C6B61CD97AAF005F2DC0 /* ReminderWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D745C6B51CD97AAF005F2DC0 /* ReminderWatcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		D70725F11CC7EB5300646549 /* RemindrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemindrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70725F51CC7EB5300646549 /* RemindrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindrUITests.swift; sourceTree = "<group>"; };
 		D70725F71CC7EB5300646549 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D745C6B51CD97AAF005F2DC0 /* ReminderWatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderWatcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				D70725D31CC7EB5300646549 /* AppDelegate.swift */,
 				D70725D51CC7EB5300646549 /* FirstViewController.swift */,
+				D745C6B51CD97AAF005F2DC0 /* ReminderWatcher.swift */,
 				D70725D71CC7EB5300646549 /* SecondViewController.swift */,
 				D70725D91CC7EB5300646549 /* Main.storyboard */,
 				D70725DC1CC7EB5300646549 /* Assets.xcassets */,
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D745C6B61CD97AAF005F2DC0 /* ReminderWatcher.swift in Sources */,
 				D70725D81CC7EB5300646549 /* SecondViewController.swift in Sources */,
 				D70725D41CC7EB5300646549 /* AppDelegate.swift in Sources */,
 				D70725D61CC7EB5300646549 /* FirstViewController.swift in Sources */,
@@ -491,6 +495,7 @@
 				D70725FC1CC7EB5300646549 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D70725FD1CC7EB5300646549 /* Build configuration list for PBXNativeTarget "RemindrTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +504,7 @@
 				D70725FF1CC7EB5300646549 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D70726001CC7EB5300646549 /* Build configuration list for PBXNativeTarget "RemindrUITests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +513,7 @@
 				D70726021CC7EB5300646549 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
