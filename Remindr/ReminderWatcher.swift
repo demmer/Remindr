@@ -21,11 +21,11 @@ class ReminderWatcher {
         print("ReminderWatcher adding watcher")
         watchers.append(callback);
         if (watchers.count == 1) {
-            print("ReminderWatcher first watcher... getting events")
-            self.getEvents()
+            self.startWatching();
+            //self.getEvents();
         }
     }
-    
+
     func notify() {
         print("ReminderWatcher notify", self.items.count)
         for (watcher) in watchers {
@@ -33,25 +33,38 @@ class ReminderWatcher {
         }
     }
 
-    func getEvents() {
-        let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Reminder);
-        let remindersPredicate = self.eventStore.predicateForRemindersInCalendars(calendars);
+    func startWatching() {
         self.eventStore.requestAccessToEntityType(EKEntityType.Reminder) { (granted, err) in
             if (!granted) {
                 print("access denied");
                 return;
             }
+            print("Adding observer")
             
-            self.eventStore.fetchRemindersMatchingPredicate(remindersPredicate, completion: {
-                (reminders: [EKReminder]?) in
-                self.items.removeAll();
-                self.items.appendContentsOf(reminders!);
-                self.notify();
-            });
+            NSNotificationCenter.defaultCenter().addObserver(self,
+                                                             selector: #selector(self.getEvents),
+                                                             name: EKEventStoreChangedNotification,
+                                                             object: self.eventStore)
+            self.getEvents()
         }
     }
     
+    @objc func getEvents() {
+        let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Reminder);
+        let remindersPredicate = self.eventStore.predicateForRemindersInCalendars(calendars);
+        
+        print("ReminderWatcher getEvents")
+        self.eventStore.fetchRemindersMatchingPredicate(remindersPredicate, completion: {
+            (reminders: [EKReminder]?) in
+            print("ReminderWatcher getEvents got", reminders?.count, "reminders")
+            self.items.removeAll();
+            let active = reminders?.filter({ (reminder) in return !reminder.completed; })
+            self.items.appendContentsOf(active!);
+            self.notify();
+        });
+    }
     
+
     static func instance() -> ReminderWatcher {
         print("ReminderWatcher getting instance");
         struct Singleton {

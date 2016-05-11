@@ -200,6 +200,11 @@
 					D70725CF1CC7EB5300646549 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = HSF5B9Y9RF;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					D70725E51CC7EB5300646549 = {
 						CreatedOnToolsVersion = 7.3;
